@@ -1,0 +1,46 @@
+directive @isLogged on QUERY | FIELD_DEFINITION | MUTATION
+
+type User {
+    id: Int!
+    firstName: String!
+    lastName: String!
+    email: String!
+    roleIds: [Role]
+    actionIds: [Action]
+}
+
+type Role {
+    id: Int!
+    name: String!
+}
+
+type Action {
+    id: String!
+    desc: String!
+}
+
+type AuthUser {
+    token: String!
+    user: User!
+}
+
+input CreateUserInput {
+    firstName: String!
+    lastName: String
+    email: String!
+    password: String!
+}
+
+input SignInInput {
+    email: String!
+    password: String!
+}
+
+type Query {
+    me: User
+}
+
+type Mutation {
+    signUp(input: CreateUserInput!): AuthUser!
+    signIn(input: SignInInput!): AuthUser!
+}

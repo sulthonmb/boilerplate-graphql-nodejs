@@ -1,0 +1,7 @@
+scalar Upload
+
+type PaginationInfo {
+    count: Int!
+    limit: Int!
+    offset: Int!
+}

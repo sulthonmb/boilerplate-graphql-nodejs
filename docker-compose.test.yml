@@ -1,0 +1,66 @@
+version: '3'
+services:
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile.test
+    image: node:12.4.0-alpine
+    container_name: app
+    restart: "no"
+    depends_on:
+     - db
+     - redis
+    environment:
+      - NODE_ENV=development
+      - PORT=3006
+      - PGHOST=db
+      - PGPORT=5432
+      - PGDATABASE=restaurants
+      - PGUSER=postgres
+      - PGPASSWORD=postgres
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - ROUND_SALT=8
+      - API_KEY=****
+      - SECRET=s*#P+3asb*t*WMu?A&UX7%#LgQz$cA+XYnMu3vFYsJda!L@%9*sVcLZu_-Zv
+      - USER_DOCS=user
+      - PASS_DOCS=12345678
+      - EXPOSE_PORT=3009
+    ports:
+      - "3009:3006"
+    volumes:
+      - .:/home/node/app
+      - app_logs:/home/node/app/logs
+      - node_modules:/home/node/app/node_modules
+    networks:
+      - app-network
+  db:
+    image: postgres
+    container_name: db
+    restart: always
+    volumes:
+      - database-data:/var/lib/postgresql/data/
+    ports:
+      - "5444:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=restaurants
+    networks:
+      - app-network  
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+      - "6333:6379"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  database-data:
+  node_modules:  
+  app_logs: 

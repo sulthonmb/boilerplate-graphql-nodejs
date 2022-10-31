@@ -1,0 +1,25 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true
+    },
+    "extends": [
+        "prettier",
+        "standard"
+    ],
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parserOptions": {
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "parser": "@babel/eslint-parser",
+    "plugins": ["@babel"],
+    "rules": {
+        "eol-last": 0,
+        "no-undef": 0,
+        "camelcase": 0
+    }
+}

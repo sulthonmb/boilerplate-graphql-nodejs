@@ -1,0 +1,130 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a backend service (API) for a food delivery app. \n\n <b>LIST ACCOUNT</b> \n\n <b>Admin:</b> \nemail: admin@gmail.com \npassword: admin123  \n\n <b>User/Customer/Restaurant:</b> \nusername: 1 \npassword: hungry12345678 \n\n <b>Note</b>\nUsername for User/Customer/Restaurant use '<b>The user/customer/restaurant id</b>' \n Password for All User/Customer/Restaurant use '<b>hungry12345678</b>' \n If you run the backend service in localhost don't forget use scheme in <b>HTTP</b> \n\n <b>You can use other docs with Postman File that included in Repository backend service.</b>",
+    "version": "1.0.0",
+    "title": "Docs Meal Delivery API"
+  },
+  "host": "meal-delivery-123.herokuapp.com",
+  "basePath": "/api/v1",
+  "tags": [
+    {
+      "name": "Auth",
+      "description": "Everything for authentication"
+    },
+    {
+      "name": "Restaurant",
+      "description": "Everything restaurant"
+    },
+    {
+      "name": "Transactions",
+      "description": "Access transactions at restaurant"
+    },
+    {
+      "name": "Purchase-Order",
+      "description": "Operations for user to order"
+    }
+  ],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/admin/signin": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Login as a Admin",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Sign In Admin",
+            "required": true,
+            "description": "Email: Must be in correct format email 'example@gmail.com'",
+            "schema": {
+              "$ref": "#/definitions/SignInAdmin"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/users/signin": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Login as a Users/Customers",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Sign In Users/Customers",
+            "required": true,
+            "description": "Username: used 'id' user/customers",
+            "schema": {
+              "$ref": "#/definitions/SignInUsersRestaurant"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "token": {
+      "type": "apiKey",
+      "name": "token",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "SignInAdmin": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "SignInUsersRestaurant": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "PurchaseOrderRequest": {
+      "type": "object",
+      "properties": {
+        "id_menu": {
+          "type": "integer"
+        },
+        "amount_order": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}
