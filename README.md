@@ -6,7 +6,7 @@
 ## Install
 
     $ git clone
-    $ cd invitation-app
+    $ cd app
     $ npm install
     $ npm run start
 
